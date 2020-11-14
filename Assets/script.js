@@ -1,6 +1,7 @@
 const key = "&appid=97e0dba8d4f54a01999bb446a04a3ad3";
 var searchedCities = [];
-let date = new Date();
+
+
 $(document).ready(function () {
   $("#start-search").on("click", function (event) {
     event.preventDefault();
@@ -32,7 +33,6 @@ $(document).ready(function () {
       console.log(counter);
     }
   });
-
   function addCityToList() {
     var city = $("#city-form").val().trim();
     $.ajax({
@@ -57,9 +57,8 @@ $(document).ready(function () {
             "card col-md-2 ml-4 bg-primary text-white"
           );
           let cardInner = $("<div>").addClass("card-body p-2 forecastInner");
-          let date = $("<h3>")
-            .addClass("card-title")
-            .text(date.toLocaleDateString("en-US"));
+
+          
           let temp = $("<p>")
             .addClass("card-text for-temp")
             .text("temperature: " + temperatureinFarenhight);
@@ -73,8 +72,8 @@ $(document).ready(function () {
               ".png"
           );
 
-          cardInner.append(date, image, temp, humidity);
-          card.append(cardBody);
+          cardInner.append(image, temp, humidity);
+          card.append(cardInner);
           $("#forecast-five-day").append(card);
         }
       }
@@ -87,6 +86,8 @@ $(document).ready(function () {
       a.attr("city-name", searchedCities[i]);
       a.text(searchedCities[i]);
       $("#saved-citys").append(a);
+      localStorage.setItem("cities", searchedCities)
+
     }
   }
 });
